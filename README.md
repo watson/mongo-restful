@@ -4,6 +4,8 @@ A very simple MongoDB RESTful proxy
 
 This is work in progress!
 
+[![Build Status](https://travis-ci.org/watson/mongo-restful.png)](https://travis-ci.org/watson/mongo-restful)
+
 ## Installation
 
 ```
