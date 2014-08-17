@@ -19,13 +19,13 @@ Currencyly the API is read-only. Feel free to do a pull request :)
 Install as a global binary:
 
 ```
-npm install -g watson/mongo-restful
+npm install -g mongo-restful
 ```
 
 Include into your own server:
 
 ```
-npm install --save watson/mongo-restful
+npm install --save mongo-restful
 ```
 
 ## CLI
