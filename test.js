@@ -1,7 +1,7 @@
 'use strict';
 
-process.env.PORT = 8081;
-process.env.MONGO_URI = 'localhost/mongo-restful-test';
+process.argv = process.argv.concat('--port 8081 localhost/mongo-restful-test'.split(' '))
+var argv = require('minimist')(process.argv.slice(2));
 
 // start the server
 require('./');
@@ -9,7 +9,7 @@ require('./');
 var http = require('http');
 var querystring = require('querystring');
 var test = require('tape');
-var db = require('mongojs')(process.env.MONGO_URI, ['test']);
+var db = require('mongojs')(argv['_'][0], ['test']);
 
 var data = [
   { _id: 1, foo: 1 },
@@ -37,7 +37,7 @@ var find = function (collection, options, expected, t) {
     if (options.filter) options.filter = JSON.stringify(options.filter);
     if (options.sort)   options.sort   = JSON.stringify(options.sort);
   }
-  var url = 'http://localhost:' + process.env.PORT + '/' + collection +
+  var url = 'http://localhost:' + argv['port'] + '/' + collection +
             (options ? '?' + querystring.stringify(options) : '');
   http.get(url, function (res) {
     var buffers = [];
@@ -51,7 +51,7 @@ var find = function (collection, options, expected, t) {
 };
 
 var getDoc = function (collection, id, expected, t) {
-  var url = 'http://localhost:' + process.env.PORT + '/' + collection + '/' + id;
+  var url = 'http://localhost:' + argv['port'] + '/' + collection + '/' + id;
   http.get(url, function (res) {
     var buffers = [];
     res.on('data', buffers.push.bind(buffers));

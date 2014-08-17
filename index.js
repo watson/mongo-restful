@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
+var argv = require('minimist')(process.argv.slice(2));
+
 var util = require('util');
 var JSONStream = require('JSONStream');
 var corsify = require('corsify')({ "Access-Control-Allow-Methods": "GET" });
 var pump = require('pump');
 var json2mongo = require('json2mongo');
-var db = require('mongojs')(process.env.MONGO_URI);
+var db = require('mongojs')(argv['_'][0]);
 var app = require('root')();
 
 var objectify = function (json) {
@@ -66,6 +68,6 @@ var get = function (req, res) {
 
 app.get('/{collection}', corsify(query));
 app.get('/{collection}/{id}([a-fA-f0-9]{24})', corsify(get));
-app.listen(process.env.PORT || 8080, function () {
+app.listen(argv['port'] || 8080, function () {
   console.log('Server running on port', app.address().port);
 });

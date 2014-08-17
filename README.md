@@ -17,10 +17,21 @@ npm install -g watson/mongo-restful
 Just run the following command:
 
 ```
-MONGO_URI=... mongo-restful
+mongo-restful [options] [arguments]
 ```
 
-Default port is 8080 (override with `PORT` environment variable)
+Specify the MongoDB URI as the first argument to the mongo-restful
+command.
+
+Options:
+
+- `--port` - specify which port the HTTP server should run on (defaults to 8080)
+
+Example:
+
+```
+mongo-restful --port 3000 localhost/my-database
+```
 
 ## API
 

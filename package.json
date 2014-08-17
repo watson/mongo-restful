@@ -23,6 +23,7 @@
     "JSONStream": "^0.9.0",
     "corsify": "^1.0.2",
     "json2mongo": "^1.0.1",
+    "minimist": "^1.1.0",
     "mongojs": "^0.13.1",
     "pump": "^0.3.5",
     "root": "^1.0.0"
