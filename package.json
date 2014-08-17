@@ -1,7 +1,7 @@
 {
   "name": "mongo-restful",
   "version": "0.0.0",
-  "description": "mongo-restful =============",
+  "description": "A very simple MongoDB RESTful proxy",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
