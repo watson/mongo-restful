@@ -16,11 +16,19 @@ Currencyly the API is read-only. Feel free to do a pull request :)
 
 ## Installation
 
+Install as a global binary:
+
 ```
 npm install -g watson/mongo-restful
 ```
 
-## Usage
+Include into your own server:
+
+```
+npm install --save watson/mongo-restful
+```
+
+## CLI
 
 Just run the following command:
 
@@ -41,7 +49,19 @@ Example:
 mongo-restful --port 3000 localhost/my-database
 ```
 
-## API
+## Integration
+
+You can also integrate mongo-restful into your exsiting node project:
+
+```javascript
+var mongoUri = 'localhost/my-database';
+var proxy = require('mongo-restful')(mongoUri);
+proxy.listen(8080, function () {
+  console.log('The MongoDB proxy is running on port 8080');
+});
+```
+
+## REST API
 
 Query a collection:
 

@@ -7,7 +7,7 @@
     "test": "node test.js"
   },
   "bin": {
-    "mongo-restful": "./index.js"
+    "mongo-restful": "./bin/mongo-restful.js"
   },
   "repository": {
     "type": "git",
