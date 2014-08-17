@@ -1,0 +1,27 @@
+{
+  "name": "mongo-restful",
+  "version": "0.0.0",
+  "description": "mongo-restful =============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "mongo-restful": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson/mongo-restful.git"
+  },
+  "author": "Thomas Watson Steen <w@tson.dk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watson/mongo-restful/issues"
+  },
+  "homepage": "https://github.com/watson/mongo-restful",
+  "dependencies": {
+    "JSONStream": "^0.9.0",
+    "mongojs": "^0.13.1",
+    "root": "^1.0.0"
+  }
+}
