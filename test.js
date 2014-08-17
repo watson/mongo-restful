@@ -50,6 +50,19 @@ var find = function (collection, options, expected, t) {
   });
 };
 
+var getDoc = function (collection, id, expected, t) {
+  var url = 'http://localhost:' + process.env.PORT + '/' + collection + '/' + id;
+  http.get(url, function (res) {
+    var buffers = [];
+    res.on('data', buffers.push.bind(buffers));
+    res.on('end', function () {
+      var result = JSON.parse(Buffer.concat(buffers));
+      t.deepEqual(result, expected);
+      t.end();
+    });
+  });
+};
+
 bootstrap(function () {
   var date = data[3].foo = data[3].foo.toISOString();
   var oid = data[data.length-1]._id = data[data.length-1]._id.toString();
@@ -92,6 +105,10 @@ bootstrap(function () {
 
   test('should allow querying with a regular expression', function (t) {
     find('test', { q: { foo: { $regex: 'XT$', $options: 'i' } } }, [{ _id: 5, foo: 'text' }], t);
+  });
+
+  test('should respond to GET /collection/id', function (t) {
+    getDoc('test', oid, { _id: oid, bar: 1 }, t);
   });
 
   test('end', function (t) {
