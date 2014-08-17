@@ -4,7 +4,7 @@
   "description": "mongo-restful =============",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "bin": {
     "mongo-restful": "./index.js"
@@ -25,5 +25,8 @@
     "mongojs": "^0.13.1",
     "pump": "^0.3.5",
     "root": "^1.0.0"
+  },
+  "devDependencies": {
+    "tape": "^2.14.0"
   }
 }
