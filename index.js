@@ -4,6 +4,7 @@
 var util = require('util');
 var JSONStream = require('JSONStream');
 var pump = require('pump');
+var json2mongo = require('json2mongo');
 var db = require('mongojs')(process.env.MONGO_URI);
 var app = require('root')();
 
@@ -27,7 +28,7 @@ var parseJSON = function (json) {
 };
 
 var getCursor = function (collection, options) {
-  var query  = parseJSON(options.q),
+  var query  = json2mongo(parseJSON(options.q)),
       filter = parseJSON(options.filter),
       sort   = parseJSON(options.sort),
       limit  = parseInt(options.limit || 0, 10),
@@ -63,7 +64,7 @@ var get = function (req, res) {
 };
 
 app.get('/{collection}', query);
-app.get('/{collection}/{id}', get);
+app.get('/{collection}/{id}([a-fA-f0-9]{24})', get);
 app.listen(process.env.PORT || 8080, function () {
   console.log('Server running on port', app.address().port);
 });
