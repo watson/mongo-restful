@@ -51,7 +51,12 @@ var query = function (req, res) {
 var get = function (req, res) {
   var id = db.ObjectId(req.params.id);
   db.collection(req.params.collection).findOne({ _id: id }, function (err, doc) {
-    // TODO: Handle error
+    if (err) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Error: ' + err.message);
+      return;
+    }
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify(doc));
   });
