@@ -3,6 +3,7 @@
 
 var util = require('util');
 var JSONStream = require('JSONStream');
+var corsify = require('corsify')({ "Access-Control-Allow-Methods": "GET" });
 var pump = require('pump');
 var json2mongo = require('json2mongo');
 var db = require('mongojs')(process.env.MONGO_URI);
@@ -63,8 +64,8 @@ var get = function (req, res) {
   });
 };
 
-app.get('/{collection}', query);
-app.get('/{collection}/{id}([a-fA-f0-9]{24})', get);
+app.get('/{collection}', corsify(query));
+app.get('/{collection}/{id}([a-fA-f0-9]{24})', corsify(get));
 app.listen(process.env.PORT || 8080, function () {
   console.log('Server running on port', app.address().port);
 });

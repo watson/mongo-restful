@@ -21,6 +21,7 @@
   "homepage": "https://github.com/watson/mongo-restful",
   "dependencies": {
     "JSONStream": "^0.9.0",
+    "corsify": "^1.0.2",
     "json2mongo": "^1.0.1",
     "mongojs": "^0.13.1",
     "pump": "^0.3.5",
