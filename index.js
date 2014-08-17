@@ -47,12 +47,14 @@ var getCursor = function (collection, options) {
 };
 
 var query = function (req, res) {
+  console.log(req.method, req.url);
   var cursor = getCursor(req.params.collection, req.query);
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   pump(cursor, JSONStream.stringify(), res);
 };
 
 var get = function (req, res) {
+  console.log(req.method, req.url);
   var id = db.ObjectId(req.params.id);
   db.collection(req.params.collection).findOne({ _id: id }, function (err, doc) {
     if (err) {
