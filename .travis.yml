@@ -11,5 +11,7 @@ deploy:
   on:
     tags: true
     repo: watson/mongo-restful
+services:
+  - mongodb
 before_install:
   - npm install -g npm@~1.4.6
