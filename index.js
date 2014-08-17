@@ -3,6 +3,7 @@
 
 var util = require('util');
 var JSONStream = require('JSONStream');
+var pump = require('pump');
 var db = require('mongojs')(process.env.MONGO_URI);
 var app = require('root')();
 
@@ -44,7 +45,7 @@ var getCursor = function (collection, options) {
 var query = function (req, res) {
   var cursor = getCursor(req.params.collection, req.query);
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  cursor.pipe(JSONStream.stringify()).pipe(res);
+  pump(cursor, JSONStream.stringify(), res);
 };
 
 var get = function (req, res) {
