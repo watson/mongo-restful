@@ -69,6 +69,11 @@ var get = function (req, res) {
       res.end('Error: ' + err.message);
       return;
     }
+    if (!doc) {
+      res.writeHead(404);
+      res.end();
+      return;
+    }
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify(doc));
   });
