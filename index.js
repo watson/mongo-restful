@@ -8,6 +8,9 @@ var json2mongo = require('json2mongo');
 var mongojs = require('mongojs');
 var app = require('root')();
 
+var objectId = /^[a-f\d]{24}$/i;
+var number = /^\d+$/
+
 var db;
 
 var objectify = function (json) {
@@ -54,7 +57,11 @@ var query = function (req, res) {
 
 var get = function (req, res) {
   console.log(req.method, req.url);
-  var id = db.ObjectId(req.params.id);
+
+  var id = req.params.id;
+  if (objectId.test(id)) id = db.ObjectId(id);
+  else if (number.test(id)) id = parseInt(id, 10);
+
   db.collection(req.params.collection).findOne({ _id: id }, function (err, doc) {
     if (err) {
       res.statusCode = 500;
@@ -71,7 +78,7 @@ module.exports = function (mongoUri) {
   db = mongojs(mongoUri);
 
   app.get('/{collection}', corsify(query));
-  app.get('/{collection}/{id}([a-fA-f0-9]{24})', corsify(get));
+  app.get('/{collection}/{id}', corsify(get));
 
   return app;
 };

@@ -17,6 +17,7 @@ var data = [
   { _id: 3, foo: 2 },
   { _id: 4, foo: new Date() },
   { _id: 5, foo: 'text' },
+  { _id: 'foo' },
   { bar: 1 }
 ];
 
@@ -107,8 +108,16 @@ bootstrap(function () {
     find('test', { q: { foo: { $regex: 'XT$', $options: 'i' } } }, [{ _id: 5, foo: 'text' }], t);
   });
 
-  test('should respond to GET /collection/id', function (t) {
+  test('should respond to GET /collection/id (with an ObjectId)', function (t) {
     getDoc('test', oid, { _id: oid, bar: 1 }, t);
+  });
+
+  test('should respond to GET /collection/id (with a string)', function (t) {
+    getDoc('test', 'foo', { _id: 'foo' }, t);
+  });
+
+  test('should respond to GET /collection/id (with a number)', function (t) {
+    getDoc('test', 1, { _id: 1, foo: 1 }, t);
   });
 
   test('end', function (t) {
